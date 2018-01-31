@@ -3,7 +3,11 @@
 # External dependencies
 #
 
-find_package(OpenGL REQUIRED)
+find_package(OpenGL)
+find_package(OpenGL_GLVND)
+if (NOT OpenGL_FOUND AND NOT OpenGL_GLVND_FOUND)
+    message(FATAL_ERROR "Unable to find OpenGL library.")
+endif()
 
 if(UNIX)
     set(RENDERER_CONTEXT_TYPE "EGL" CACHE STRING "Renderer context type")
